@@ -1,24 +1,22 @@
+import { checkDbConnection } from "./lib/connect.js";
+import crypto from "crypto";
 import express from "express";
-import dotenv from "dotenv";
-import cookieParser from "cookie-parser";
-
+import bodyParser from "body-parser";
+import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  console.log(req.cookies);
-  res.cookie("visited", "true", {
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-  });
-  res.send("Express + TypeScript Server");
+  res.send("Hello World!");
 });
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+app.listen(port, async () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+  checkDbConnection().then((status) => {
+    console.log(`Database status: ${status}`);
+  });
 });
