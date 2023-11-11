@@ -18,32 +18,6 @@ export async function sendEmail(email: string, token: string) {
   console.log(data);
 }
 
-export function checkAuthToken(
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-) {
-  const { authorization } = req.headers;
-
-  if (req.path === "/" || req.path === "/verify" || req.path === "/auth") {
-    return next();
-  }
-
-  if (!authorization || !authorization.startsWith("Bearer ")) {
-    return res.status(401).send("Unauthorized");
-  }
-
-  const token = authorization.split(" ")[1];
-
-  jwt.verify(token, secret, (err, decoded) => {
-    if (err) {
-      return res.status(401).send("Unauthorized");
-    }
-    console.log(decoded);
-    next();
-  });
-}
-
 export function generateJwt(email: string, expiresIn: string = "30d") {
   return jwt.sign({ email }, secret, { expiresIn });
 }

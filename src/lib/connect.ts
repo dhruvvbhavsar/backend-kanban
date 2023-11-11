@@ -16,6 +16,9 @@ export const sql = postgres({
   },
 });
 
+// const connectionString = process.env.DATABASE_URL;
+// export const sql = postgres(connectionString);
+
 export async function checkDbConnection() {
   try {
     await sql`select 1`;
