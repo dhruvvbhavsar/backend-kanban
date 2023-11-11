@@ -4,6 +4,8 @@ import * as dotenv from "dotenv";
 import { checkAuthToken } from "./lib/middleware.js";
 import { project_router } from "./routes/projectRoutes.js";
 import { auth_router } from "./routes/authRoutes.js";
+import { list_router } from "./routes/listRoutes.js";
+import { task_router } from "./routes/taskRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -17,6 +19,8 @@ app.get("/", (req, res) => {
 
 app.use("/auth", auth_router);
 app.use("/project", project_router);
+app.use("/list", list_router);
+app.use("/task", task_router);
 
 app.listen(port, async () => {
   console.log(`Intent server listening at http://localhost:${port} 👁️`);
