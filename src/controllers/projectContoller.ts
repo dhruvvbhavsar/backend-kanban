@@ -26,6 +26,21 @@ export const create = async (req: Request, res: Response) => {
   }
 };
 
+export const add_user = async (req: Request, res: Response) => {
+  const { user_id, project_id, write_access } = req.body;
+
+  try {
+    const projectAccessData = await sql`
+      INSERT INTO project_access (user_id, project_id, write_access)
+      VALUES (${user_id}, ${project_id}, ${write_access}) returning *`;
+
+    res.send(projectAccessData);
+  } catch (error) {
+    console.error("Error adding user to project:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 export const _delete = async (req: Request, res: Response) => {
   const { id } = req.body;
 

@@ -6,6 +6,9 @@ import { project_router } from "./routes/projectRoutes.js";
 import { auth_router } from "./routes/authRoutes.js";
 import { list_router } from "./routes/listRoutes.js";
 import { task_router } from "./routes/taskRoutes.js";
+import { checklist_router } from "./routes/checklistRoutes.js";
+import { comment_router } from "./routes/commentRoutes.js";
+import { get_router } from "./routes/getRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -21,6 +24,9 @@ app.use("/auth", auth_router);
 app.use("/project", project_router);
 app.use("/list", list_router);
 app.use("/task", task_router);
+app.use("/checklist", checklist_router);
+app.use("/comments", comment_router);
+app.use("/get", get_router);
 
 app.listen(port, async () => {
   console.log(`Intent server listening at http://localhost:${port} 👁️`);

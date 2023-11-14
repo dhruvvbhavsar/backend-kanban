@@ -16,8 +16,8 @@ export const auth = async (req: Request, res: Response) => {
 export const register = async (req: Request, res: Response) => {
   const { name, username, profile, email } = req.body;
   const data =
-    await sql`insert into users (name, username, profile, email) values (${name}, ${username}, ${profile}, ${email}) returning id, name, username, profile, email`;
-  console.log(data);
+    await sql`insert into users (name, username, profile, email) values (${name}, ${username}, ${profile}, ${email}) returning *`;
+  res.send(data);
 };
 
 export const verify = async (req: Request, res: Response) => {

@@ -11,6 +11,11 @@ export const _new = async (req: Request, res: Response) => {
   res.send(data);
 };
 
+export const move = async (req: Request, res: Response) => {
+  const { list_id, prev_id, next_id } = req.body;
+  //do stuff
+};
+
 export const _delete = async (req: Request, res: Response) => {
   const { id } = req.body;
   const data = await sql`
